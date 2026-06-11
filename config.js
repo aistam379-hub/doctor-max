@@ -7,18 +7,18 @@
 /* (1) إعدادات مشروع Firebase
    من: Firebase Console → ⚙️ Project settings → Your apps → Web app → SDK config */
 window.FIREBASE_CONFIG = {
-  apiKey:            "AIzaSyCiiCoRtixYhVZ6_VhiSSsGFIs4Pa7RxDQ",
-  authDomain:        "testtt-fa7b1.firebaseapp.com",
-  projectId:         "testtt-fa7b1",
-  storageBucket:     "testtt-fa7b1.firebasestorage.app",
-  messagingSenderId: "141969438453",
-  appId:             "1:141969438453:web:27d05e615da8d77f0f77bc"
+  apiKey:            "AIzaSyC-5L7X48zF5AnbiPZQqI6vsPghkqlY6Ic",
+  authDomain:        "lite-8bdad.firebaseapp.com",
+  projectId:         "lite-8bdad",
+  storageBucket:     "lite-8bdad.firebasestorage.app",
+  messagingSenderId: "505081056049",
+  appId:             "1:505081056049:web:4ddfca1ac71afc19133e10"
 };
 
 /* (2) حسابات جوجل للموظفين — نفس هذه الإيميلات يجب أن تُوضع في قواعد Firestore */
 window.DOCBOOK_ROLES = {
-  doctor: ['nawwacode@gmail.com'],   // ← بريد/بُرُد الطبيب (يمكن أكثر من واحد)
-  nurse:  ['ahmadtaim450@gmail.com', 'aistam379@gmail.com']    // ← بريد/بُرُد الممرضة
+  doctor: ['ahmadtaim450@gmail.com', 'aistam379@gmail.com'],   // ← بريد/بُرُد الطبيب
+  nurse:  ['nawwacode@gmail.com']                               // ← بريد/بُرُد الممرضة
 };
 
 /* (دالة مساعدة — لا تعدّلها) */
