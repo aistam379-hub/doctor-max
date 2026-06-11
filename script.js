@@ -84,7 +84,6 @@ if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(
         _dataLoaded = true;
         revealApp();
         if (typeof loadData === 'function') loadData();
-        cleanOldAlerts();
       });
     }
     if (window._fbReady) initAuthWatch();
@@ -132,16 +131,6 @@ if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(
     }
     function notifyOtherTab(key) {
       // لم تعد ضرورية — onSnapshot يُزامن تلقائياً
-    }
-    function cleanOldAlerts() {
-      if (!window._fb) return;
-      var cutoff = Date.now() - 48 * 60 * 60 * 1000;
-      window._fb.getDocs(window._fb.col('alerts')).then(function(snap) {
-        snap.docs.forEach(function(d) {
-          var ts = d.data().ts || 0;
-          if (ts < cutoff) window._fb.deleteDoc(window._fb.docRef('alerts', d.id)).catch(function(){});
-        });
-      }).catch(function(){});
     }
 
     const daysAr = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
@@ -2046,12 +2035,7 @@ if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(
         window._dayChartAnimate = true; // شغّل تأثير تصاعد الخط عند فتح الرئيسية
         renderHomeSection();
       }
-      else if (section === 'calendar') {
-        document.getElementById('calendarSection').classList.remove('hidden');
-        renderCalendar();
-        renderAgendaForDay(selectedDayStr || todayStr);
-        if (typeof setScheduleView === 'function') setScheduleView(scheduleView);
-      }
+      else if (section === 'calendar') { document.getElementById('calendarSection').classList.remove('hidden'); if (typeof setScheduleView === 'function') setScheduleView(scheduleView); }
       else if (section === 'patients') { 
         document.getElementById('patientBookSection').classList.remove('hidden'); 
         renderPatientBook(); 
@@ -4165,7 +4149,7 @@ if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(
       var docName = s.title || 'الطبيب', specialty = s.specialty || '';
       var mobile = s.mobile || '', landline = s.landline || '', address = s.address || '';
       var emblem = '<svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 86 C22 64 9 46 9 31 A20 20 0 0 1 50 23 A20 20 0 0 1 91 31 C91 46 78 64 50 86 Z" fill="none" stroke="#0d9488" stroke-width="3.4"/><rect x="44" y="36" width="12" height="30" rx="2" fill="#0d9488"/><rect x="35" y="45" width="30" height="12" rx="2" fill="#0d9488"/></svg>';
-      var brandHtml = '<img src="brand-logo.png" style="height:76px;width:auto;display:block;" alt="DocBook">';
+      var brandHtml = '<div class="brand-emblem">' + emblem + '</div><div class="brand-text"><span class="b1">Doc</span><span class="b2">Book</span></div>';
       var css = '@page{size:A4;margin:0;}'
         + '*{font-family:Cairo,Tajawal,Arial,sans-serif;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}'
         + 'html,body{margin:0;padding:0;background:#fff;}'
