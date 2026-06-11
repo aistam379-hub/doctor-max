@@ -2046,7 +2046,12 @@ if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(
         window._dayChartAnimate = true; // شغّل تأثير تصاعد الخط عند فتح الرئيسية
         renderHomeSection();
       }
-      else if (section === 'calendar') { document.getElementById('calendarSection').classList.remove('hidden'); if (typeof setScheduleView === 'function') setScheduleView(scheduleView); }
+      else if (section === 'calendar') {
+        document.getElementById('calendarSection').classList.remove('hidden');
+        renderCalendar();
+        renderAgendaForDay(selectedDayStr || todayStr);
+        if (typeof setScheduleView === 'function') setScheduleView(scheduleView);
+      }
       else if (section === 'patients') { 
         document.getElementById('patientBookSection').classList.remove('hidden'); 
         renderPatientBook(); 
